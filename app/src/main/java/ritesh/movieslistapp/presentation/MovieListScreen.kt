@@ -81,7 +81,7 @@ fun MovieList(
     viewModel: MovieViewModel
 ) {
 
-    val pagingData = viewModel.pagingData.collectAsLazyPagingItems()
+    val pagingData = viewModel.filterData().collectAsLazyPagingItems()
 
     Box(
         modifier = Modifier

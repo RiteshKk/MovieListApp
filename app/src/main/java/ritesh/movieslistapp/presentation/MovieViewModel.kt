@@ -72,25 +72,26 @@ class MovieViewModel @Inject constructor(
     private val _title: MutableStateFlow<String> = MutableStateFlow("")
     val title: StateFlow<String> = _title.asStateFlow()
 
-    val pagingData = Pager(
+    private val pagingData = Pager(
         config = PagingConfig(
             pageSize = 20,
             maxSize = 100,
-            enablePlaceholders = false
+            enablePlaceholders = false,
+            initialLoadSize = 20
         ),
         pagingSourceFactory =
-        { MoviePagingSource(repo, _title,_searchTextState.value) }
+        { MoviePagingSource(repo, _title, _searchTextState.value) }
     ).flow.cachedIn(viewModelScope)
 
-    fun filterData() {
-       val result = if (_searchTextState.value.length >= 3) {
-            pagingData.onEach { paging ->
-                paging.filter { it.name.contains(_searchTextState.value, true) }
-            }
-        } else {
-            pagingData.onEach { paging ->
-                paging.filter { true }
-            }
+    // lateinit var result: Flow<PagingData<Content>>
+    fun filterData() = if (_searchTextState.value.length >= 3) {
+        pagingData.onEach { paging ->
+            paging.filter { it.name.contains(_searchTextState.value, true) }
+        }
+    } else {
+        pagingData.onEach { paging ->
+            paging.filter { true }
         }
     }
 }
+
