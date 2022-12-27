@@ -1,12 +1,13 @@
 package ritesh.movieslistapp.common
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import ritesh.movieslistapp.R
 import java.io.IOException
-import java.io.InputStream
 
+/*fetching drawable from folder by using name
+if name not matched with drawable then returning default drawable id
+* @param name : drawable name
+* @return returning actual drawable id */
 fun getDrawableByName(
     context: Context,
     name: String
@@ -18,21 +19,9 @@ fun getDrawableByName(
     return drawableId
 }
 
-fun getBitmapFromAssets(
-    context: Context,
-    fileName: String = "placeholder_for_missing_posters.png"
-): Bitmap? {
-    return try {
-        val inputStream: InputStream = context.assets.open(fileName)
-        val bitmap = BitmapFactory.decodeStream(inputStream)
-        inputStream.close()
-        bitmap
-    } catch (e: IOException) {
-        e.printStackTrace()
-        null
-    }
-}
-
+/*
+* converting px to android compatible dp value
+* */
 fun convertPixelsToDp(
     context: Context,
     pixels: Float
@@ -41,6 +30,8 @@ fun convertPixelsToDp(
     return (pixels / screenPixelDensity)
 }
 
+/*
+* reading json file assets folder */
 fun readFileFromAsset(
     context: Context,
     fileName: String

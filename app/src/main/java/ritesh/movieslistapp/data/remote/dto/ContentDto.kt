@@ -11,6 +11,7 @@ data class ContentDto(
     val posterImage: String?
 )
 
+/* converting Dto classes to actual models */
 fun ContentDto.toContent(): Content {
     return Content(
         name = this.name ?: "",

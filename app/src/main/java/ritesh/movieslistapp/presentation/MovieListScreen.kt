@@ -1,12 +1,14 @@
 package ritesh.movieslistapp.presentation
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -16,11 +18,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
@@ -29,12 +32,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState.Error
 import androidx.paging.LoadState.Loading
 import androidx.paging.LoadState.NotLoading
-import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import ritesh.movieslistapp.common.convertPixelsToDp
-import ritesh.movieslistapp.domain.model.Content
 import ritesh.movieslistapp.presentation.SearchWidgetState.CLOSE
 import ritesh.movieslistapp.presentation.SearchWidgetState.OPEN
+import ritesh.movieslistapp.presentation.appbar.MainAppBar
 
 @Composable
 fun MovieListScreen(
@@ -81,7 +83,8 @@ fun MovieList(
     viewModel: MovieViewModel
 ) {
 
-    val pagingData = viewModel.filterData().collectAsLazyPagingItems()
+    viewModel.filterData()
+    val pagingData = viewModel.pagingDataResult.collectAsLazyPagingItems()
 
     Box(
         modifier = Modifier
@@ -122,7 +125,10 @@ fun MovieList(
                 }
                 if (pagingData.loadState.refresh is Loading) {
                     item {
-                        Box(modifier = Modifier.fillMaxSize()) {
+                        Box(
+                            modifier =
+                            Modifier.fillMaxSize()
+                        ) {
                             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                         }
                     }
@@ -147,6 +153,20 @@ fun MovieList(
                     }
                 }
             }
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp)
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Black,
+                            Color.Transparent
+                        )
+                    )
+                )
         )
     }
 }

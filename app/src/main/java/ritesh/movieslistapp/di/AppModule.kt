@@ -4,7 +4,6 @@ import android.app.Application
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +16,7 @@ import ritesh.movieslistapp.data.repository.MovieRepository
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+/* class to provide dependency */
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {

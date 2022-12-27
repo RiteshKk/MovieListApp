@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873666150251",
+    "project_id": "movieapp-c4393",
+    "storage_bucket": "movieapp-c4393.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873666150251:android:3e473b7e73926ef0d8962e",
+        "android_client_info": {
+          "package_name": "ritesh.movieslistapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873666150251-73gse7b9hbmsf55pn071depevtcjtrvc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2uP7arMho3H2eR34CQD94n7i2XjJi3tg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873666150251-73gse7b9hbmsf55pn071depevtcjtrvc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

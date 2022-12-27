@@ -9,10 +9,13 @@ import ritesh.movieslistapp.data.repository.MovieRepository
 import ritesh.movieslistapp.domain.model.Content
 import java.io.IOException
 
+/** paging source class
+ * responsible for loading paged data
+ *part of paging library
+ **/
 class MoviePagingSource(
     private val repository: MovieRepository,
-    var title: MutableStateFlow<String>,
-    val query: String = ""
+    var title: MutableStateFlow<String>
 ) : PagingSource<Int, Content>() {
     override fun getRefreshKey(state: PagingState<Int, Content>): Int? {
         return state.anchorPosition?.let {
@@ -27,15 +30,10 @@ class MoviePagingSource(
             val response = repository.getMovieList(page = position)
             title.emit(response.page.title ?: "")
             val remoteData = response.page.toPageData()
-            val content = if (query.length >= 3) {
-                remoteData.content.filter { it.name.contains(query, true) }
-            } else {
-                remoteData.content
-            }
             val nextKey = if (remoteData.content.size < params.loadSize) null else position + 1
             val prevKey = if (position == 1) null else position - 1
             LoadResult.Page(
-                content,
+                remoteData.content,
                 prevKey,
                 nextKey
             )

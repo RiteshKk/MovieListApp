@@ -3,20 +3,18 @@ package ritesh.movieslistapp.data.remote
 import android.content.Context
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Protocol
 import okhttp3.Response
-import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
-import ritesh.movieslistapp.BuildConfig
 import ritesh.movieslistapp.common.readFileFromAsset
-import java.io.IOException
 
+/*
+* Mock interceptor class which will read actual request and respond based on the page number */
 class MockClientInterceptor(val context: Context) : Interceptor {
     override fun intercept(chain: Chain): Response {
 
-        return if (BuildConfig.DEBUG) {
+        return if (chain.request().url.toString().startsWith("https://www.fetchFromLocalDatabase.com", ignoreCase = true)) {
             val url = chain.request().url
             val jsonResponse: String = when (url.queryParameter("page")) {
                 "1" -> readFileFromAsset(context, "CONTENTLISTINGPAGE-PAGE1.json")
