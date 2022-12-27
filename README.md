@@ -1,0 +1,11 @@
+# MovieListApp
+Application is showing movie name by reading json files from local.
+I have implemented
+pagination,
+MVVM Architecture,
+Jetpack Compose,
+Dagger Hilt and
+Retrofit.
+I have also implemented search functionality but its fluctuating the UI as the UI gets updated on every search.
+This is just because of local search.
+Added Unit Testing and comments on code.
